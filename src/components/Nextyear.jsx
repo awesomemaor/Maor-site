@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { LampContainer } from "./ui/lamp";
 import { HeroHighlight, Highlight } from "./ui/hero-highlight";
+import { MacbookScroll } from "./ui/macbook-scroll";
 
 function Maorledet2025() {
   return (
@@ -14,6 +15,10 @@ function Maorledet2025() {
         background: "linear-gradient(to bottom, #6a0dad, #4b0082, #0000ff)", // רקע מותאם אישית לחלק זה
       }}
     >
+      <div className="relative w-full max-w-screen-md h-[500px]">
+        <MacbookScroll src="/maorledet2025.jpg" title="מעורלדת 2025" />
+      </div>
+
       {/* מנורה */}
       <LampContainer className="mb-8">
         <motion.h1
