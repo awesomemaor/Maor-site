@@ -1,84 +1,61 @@
-"use client";
+import React, { useRef } from "react";
+import { VelocityScroll } from "./ui/scroll-based-velocity";
+import { SparklesText } from "./ui/sparkles-text";
+import { Confetti } from "./ui/confetti";
+import { ShineBorder } from "./ui/shine-border"; // import the ShineBorder component
 
-import React from "react";
-import { motion } from "framer-motion";
-import { LampContainer } from "./ui/lamp";
-import { HeroHighlight, Highlight } from "./ui/hero-highlight";
-import { MacbookScroll } from "./ui/macbook-scroll";
+export default function Maorledet2025() {
+  const confettiRef = useRef(null);
 
-function Maorledet2025() {
   return (
-    <div
-      id="nextyear"
-      className="flex flex-col justify-center items-center min-h-screen text-white py-12"
-      style={{
-        background: "linear-gradient(to bottom, #6a0dad, #4b0082, #0000ff)", // רקע מותאם אישית לחלק זה
-      }}
-    >
-      <div className="relative w-full max-w-screen-md h-[500px]">
-        <MacbookScroll src="/maorledet2025.jpg" title="מעורלדת 2025" />
-      </div>
+    <div className="flex flex-col items-center justify-center min-h-screen text-white p-8 text-center relative overflow-hidden">
+      {/* קונפטי שנשחרר על המעורלדת 2025 */}
 
-      {/* מנורה */}
-      <LampContainer className="mb-8">
-        <motion.h1
-          initial={{ opacity: 0.5, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
-          className="text-center bg-gradient-to-br from-yellow-400 to-red-600 py-6 px-12 text-7xl font-extrabold tracking-tight text-transparent bg-clip-text md:text-8xl"
-        >
-          מעורלדת 2025
-        </motion.h1>
-      </LampContainer>
-
-      {/* פסקה עם HeroHighlight */}
-      <HeroHighlight>
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
+      <Confetti
+        ref={confettiRef}
+        className="absolute left-0 top-0 w-full h-full pointer-events-none"
+        onMouseEnter={() => {
+          confettiRef.current?.fire({});
+        }}
+      />
+      
+      {/* כותרת עם ShineBorder */}
+      <ShineBorder
+        borderRadius={12}
+        borderWidth={3}
+        duration={2}
+        color="#ff00ff" // צבע של הקו
+        className="mb-8"
+      >
+        <SparklesText
+          text="מעורלדת 2025"
+          className="text-6xl md:text-8xl font-extrabold mb-8 text-gradient bg-gradient-to-r from-pink-500 via-yellow-400 to-purple-600 bg-clip-text animate-pulse cursor-pointer"
+          onMouseEnter={() => {
+            confettiRef.current?.fire({});
           }}
-          animate={{
-            opacity: 1,
-            y: [20, -5, 0],
-          }}
-          transition={{
-            duration: 0.5,
-            ease: [0.4, 0.0, 0.2, 1],
-          }}
-          className="bg-gradient-to-t from-purple-800 via-purple-700 to-purple-600 shadow-xl rounded-xl p-8 w-full max-w-4xl mt-4 mx-4 sm:mx-8"
-        >
-          <p className="text-lg mb-6 text-center leading-relaxed sm:text-xl">
-            השנה, מעורלדת תעשה היסטוריה. זה לא יהיה רק לילה – זה יהיה אירוע שישנה את חוקי המשחק. חוויות שיטריפו את החושים, רגעים שיגרמו ללב לפעום בקצב מסחרר, וכוסות שיתמלאו שוב ושוב עד שכוח המשיכה יזכיר לכולנו מי באמת שולט.
-            <br />
-            <br />
-            ב-2025, אנחנו שוברים כל גבול, שוברים כל שיא, ושוברים… אולי גם קצת את עצמנו.
-          </p>
+        />
+      </ShineBorder>
 
-          {/* Highlight בפסקה */}
-          <p className="text-lg mb-6 text-center leading-relaxed sm:text-xl">
-            השנה, מעורלדת תעשה היסטוריה. זה לא יהיה רק לילה – זה יהיה אירוע שישנה את חוקי המשחק. חוויות שיטריפו את החושים, רגעים שיגרמו ללב לפעום בקצב מסחרר, וכוסות שיתמלאו שוב ושוב עד שכוח המשיכה יזכיר לכולנו מי באמת שולט.
-            <br />
-            <br />
-            ב-2025, אנחנו שוברים כל גבול, שוברים כל שיא, ושוברים… אולי גם קצת את עצמנו.
-            <Highlight className="text-black dark:text-white">
-              זאת לא תהיה סתם מסיבה, זו תהיה חוויה שכולנו נזכור לעד.
-            </Highlight>
-          </p>
-        </motion.div>
-      </HeroHighlight>
+      {/* פסקה */}
+      <p className="text-lg md:text-2xl max-w-3xl mb-12 text-white/90 drop-shadow-lg leading-relaxed">
+        זה הולך להיות הלילה שלא תשכחו! כל הכוכבים מתקבצים מול העיניים שלנו, האנרגיות בשמיים, והמוזיקה לא עוצרת לרגע.
+        שתייה ללא תחתית, אנשים שלא נשכח (וכנראה כן נשכח בבוקר), ורגעים שנזכור לנצח. מסיבה שתשבור את כל החוקים, 
+        כי מעורלדת 2025 היא לא סתם חגיגה – היא חוויה שאין לה תחליף!
+      </p>
 
-      {/* כפתור לפרטים נוספים */}
-      <div className="flex justify-center mt-8">
-        <a
-          href="mailto:contact@maorledet.com"
-          className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-full shadow-md hover:scale-105 transition-transform"
-        >
-          לפרטים נוספים
-        </a>
-      </div>
+      {/* טקסט שזז עם גלילה */}
+      <VelocityScroll defaultVelocity={5} numRows={3} className="text-indigo-200 text-xl md:text-2xl font-semibold tracking-wide mb-12">
+        אתם מוכנים לזה? זה מתקרב! הולך להיות מטורף! מעורלדת 2025! משהו שלא ראיתם בחיים!
+      </VelocityScroll>
+
+      {/* כפתור שוקל שיכנס לנושא */}
+      <a
+        href="#"
+        className="px-8 py-3 text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-xl text-white hover:scale-105 transition-transform duration-300"
+      >
+        ✨ הצטרפו אלינו עכשיו! ✨
+      </a>
+
     </div>
   );
 }
-
-export default Maorledet2025;

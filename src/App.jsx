@@ -11,7 +11,7 @@ import './index.css'; // ייבוא קובץ ה-CSS שהגדרת בו את Tailw
 
 function App() {
   return (
-<div className="relative bg-gradient-to-r from-purple-700 via-indigo-800 to-purple-900 bg-[length:400%_400%] animate-gradient-xy">
+    <div className="relative bg-gradient-to-r from-purple-700 via-indigo-800 to-purple-900 bg-[length:400%_400%] animate-gradient-xy">
       {/* Navbar מקובע */}
       <Navbar />
       {/* החלת האפקט רק על התוכן הפנימי */}
@@ -38,4 +38,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
