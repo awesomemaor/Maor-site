@@ -1,76 +1,77 @@
 "use client";
-
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { ContainerScroll } from "./ui/container-scroll-animation";
 import { TextHoverEffect } from "./ui/text-hover-effect";
 import { motion } from "framer-motion";
 import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
-import { TextGenerateEffect } from "./ui/text-generate-effect";
-import { FlipWords } from "./ui/flip-words"; // importing FlipWords component
+import { AnimatedListDemo } from "./ui/animated-list-demo";
+import { TextAnimate } from "./ui/blur-text";
 
-const words=["incredible", "amazing", "mind-blowing", "unbelievable"];
+const infiniteItems = [
+  { name: "אופיר בן עמי", quote: "כשהגעתי למעורלדת, הרגשתי כאילו אני נכנס לתוך עולם חדש. כל פרט, כל שיר, כל אדם - הם חלק מהמקום המיוחד הזה. זה לא רק אירוע, זה הרגשה של משפחה, של חוויות משותפות, של לאהוב את החיים בכל מובן." },
+  { name: "לינוי מוסקלינקו", quote: "הערב שהייתי בו במעורלדת לא היה דומה לשום דבר שראיתי לפני. האנרגיה באוויר הייתה חשמלית, אנשים מכל קצוות הארץ התמזגו לכדי רגעים שלא אשכח. המעורלדת היא סיפור שאין לו סוף, הוא כל הזמן מחדש את עצמו." },
+  { name: "אופק גרסטן", quote: "מדי שנה, אני מרגיש איך המעורלדת הופכת להיות יותר ויותר בלתי נשכחת. כל פעם מחדש יש משהו חדש, אבל תמיד יש את אותה הרגשה של אחדות, שמחה וקסם. זו החוויה הכי מדהימה שאני יכול לחוות." },
+];
 
 function Home() {
   return (
-    <div
-      id="home"
-      className="relative flex flex-col items-center justify-center min-h-[calc(100vh+100px)] bg-black text-white p-6 overflow-hidden"
-    >
-      {/* רקע סרטון */}
-      <div className="absolute inset-0 z-0">
-        <video
-          src="/background.mp4" // סרטון לרקע
-          autoPlay
-          loop
-          muted
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        />
-      </div>
-
-      {/* אפקט רקע מהפנט */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute left-1/4 top-1/3 w-96 h-96 bg-purple-500 rounded-full opacity-40 blur-3xl"></div>
-        <div className="absolute right-1/4 bottom-1/3 w-72 h-72 bg-fuchsia-600 rounded-full opacity-50 blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-pink-500 opacity-20 blur-[12rem]"></div>
-      </div>
-
-      {/* טקסט ראשי - מעורלדת */}
+    <div id="home" className="relative flex flex-col items-center justify-center min-h-screen text-white p-6 overflow-hidden">
+      {/* כותרת */}
       <motion.div
-        initial={{ opacity: 0, y: -100 }}
+        initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="relative z-10 flex flex-col items-center text-center"
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="relative z-10 flex flex-col items-center justify-center text-center mt-20"
       >
         <div className="h-[16rem] flex items-center justify-center">
-          <TextHoverEffect text=" מעורלדת " />
+          <TextHoverEffect text="מעורלדת" />
         </div>
       </motion.div>
 
-      {/* הוספת המילים המתחלפות */}
-      <div className="text-4xl mx-auto font-normal text-neutral-600 dark:text-neutral-400">
-      <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-600">
-      Welcome To The Most</span>
-      <FlipWords words={words}
-        className="font-bold text-5xl font-bold text-violet-500 outline-black drop-shadow-xl" // צבעים אלו ישתמשו במילים המתחלפות
-        /> <br /> 
-        <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-600">
-Event In Your Life</span>
-    </div>
+      {/* טקסט אנימציה */}
+      <TextAnimate 
+        animation="blurInUp" 
+        by="character" 
+        once 
+        duration={1.5} 
+        className="z-10 text-3xl font-extrabold text-white drop-shadow-lg"
+      >
+        ״For Memories We Will Forget The Next Day״
+      </TextAnimate>
 
-      {/* אפקטי תאורה נוספים */}
+      {/* קונטיינר של הסרטון עם שימור גודל ושיפור ביצועים */}
+      <div className="absolute right-10 top-35">
+        <ContainerScroll>
+          {/* וידאו נשאר בגודל המקורי עם ביצועים משופרים */}
+          <div className="relative w-full h-full overflow-hidden bg-black">
+            <video
+              src="/background.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className=" object-cover w-auto h-auto object-left-top "
+            />
+          </div>
+        </ContainerScroll>
+      </div>
+
+      {/* אפקט מעבר למטה */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
-      {/* הוספת InfiniteMovingCards */}
-      <div className="mt-16 w-full flex justify-center">
+      {/* כרטיסים נעים (שיפרנו ביצועים עם React.memo) */}
+      <div className="mt-72 w-full flex justify-center">
         <InfiniteMovingCards
-          items={[
-            { name: "משתמש 1", quote: "זה היה מדהים!", title: "שחקן" },
-            { name: "משתמש 2", quote: "החוויה הכי טובה!", title: "מוזיקאי" },
-            { name: "משתמש 3", quote: "אני לא מאמין כמה נהנתי!", title: "מעצב" },
-          ]}
+          items={infiniteItems}
           direction="left"
           speed="normal"
           pauseOnHover={true}
         />
+      </div>
+
+      {/* רשימה מונפשת */}
+      <div className="absolute left-[-10vw] top-24 w-full max-w-4xl">
+        <AnimatedListDemo />
       </div>
     </div>
   );

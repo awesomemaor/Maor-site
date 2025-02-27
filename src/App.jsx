@@ -6,18 +6,20 @@ import Alchohol from "./components/Alchohol";
 import Maorledet2025 from "./components/Nextyear";
 import Gallery from "./components/Gallery";
 import { TracingBeam } from "./components/ui/tracing-beam";
-import { BackgroundGradientAnimation } from "./components/ui/background-gradient-animation";
 import './index.css'; // ייבוא קובץ ה-CSS שהגדרת בו את Tailwind
+import ParticleBackground from "./components/ui/particlebackground"; // ייבוא האנימציה
 
 function App() {
   return (
-    <div className="relative bg-gradient-to-r from-purple-700 via-indigo-800 to-purple-900 bg-[length:400%_400%] animate-gradient-xy">
+    <div className="relative">
       {/* Navbar מקובע */}
+      <ParticleBackground />
+
       <Navbar />
-      {/* החלת האפקט רק על התוכן הפנימי */}
+
       <TracingBeam>
         <div className="relative z-10">
-          {/* התוכן עם הפסקי זמן */}
+
           <Element name="home">
             <Home />
           </Element>

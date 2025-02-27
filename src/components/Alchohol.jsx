@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AlcoholCalculator from "./AlcoholCalculator";
-import { BackgroundGradientAnimation } from "./ui/background-gradient-animation";
+import Lottie from "lottie-react";
+import beeranimation from "./animations/beeranimation.json";
 
 const Alcohol = () => {
   const drinksInfo = [
@@ -59,13 +60,21 @@ const Alcohol = () => {
   return (
       <div className="min-h-screen text-white">
         {/* כותרת */}
-        <header
-          className="h-64 flex flex-col justify-center items-center text-center bg-cover bg-center"
-        >
+        
+        <header className="h-64 flex items-center justify-center bg-cover bg-center">
+        {/* טקסט בצד שמאל */}
+        <div className="text-center mr-4">
           <h1 className="text-5xl font-extrabold drop-shadow-md">עולם האלכוהול</h1>
-          <p className="mt-4 text-lg font-medium">כל מה שצריך לדעת על סוגי משקאות</p>
-        </header>
+        </div>
 
+          <div className="w-32 h-32">
+            <Lottie 
+              animationData={beeranimation}  // הנתונים של האנימציה
+              loop={true}  // אם אתה רוצה שהאנימציה תחזור על עצמה
+            />
+          </div>
+        </header>
+ 
         {/* סרטון */}
         <section className="flex justify-center mt-10 px-4">
           <video

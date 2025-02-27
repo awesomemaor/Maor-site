@@ -1,43 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { galleryItems } from "./styles/galleryItems"; // ייבוא רשימת התמונות והסרטונים
 
-const galleryItems = [
-  { type: 'image', src: '/gallerypage/image1.jpg', alt: 'תמונה 1' },
-  { type: 'image', src: '/gallerypage/image2.jpg', alt: 'תמונה 2' },
-  { type: 'image', src: '/gallerypage/image3.jpg', alt: 'תמונה 3' },
-  { type: 'video', src: '/gallerypage/video1.mp4', alt: 'סרטון 1' },
-  { type: 'video', src: '/gallerypage/video2.mp4', alt: 'סרטון 2' },
-  { type: 'video', src: '/gallerypage/video3.mp4', alt: 'סרטון 3' },
-];
+// פונקציה לערבוב אקראי של האלמנטים
+const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
-const Gallery = () => {
+export default function Gallery() {
+  const [shuffledItems, setShuffledItems] = useState([]);
+
+  useEffect(() => {
+    setShuffledItems(shuffleArray([...galleryItems]));
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-900 text-white py-10">
-      <h1 className="text-center text-4xl font-bold mb-12">גלריית הזכרונות</h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4">
-        {galleryItems.map((item, index) => (
-          <div key={index} className="relative overflow-hidden rounded-lg shadow-lg">
-            {item.type === 'image' ? (
+    <section id="gallery" className="p-4 sm:p-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+        {shuffledItems.map((item, idx) => (
+          <div
+            key={idx}
+            className="relative overflow-hidden rounded-lg bg-white/10 backdrop-blur-lg shadow-lg transition-transform duration-200 hover:scale-105"
+            style={{
+              aspectRatio: item.width / item.height, // שמירה על פרופורציות נכונות
+            }}
+          >
+            {item.type === "image" ? (
               <img
                 src={item.src}
-                alt={item.alt}
-                className="w-full h-auto object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
+                alt={`Gallery image ${idx + 1}`}
+                className="w-full h-full object-cover rounded-lg"
+                loading="lazy" // טעינה עצלה לתמונות
               />
             ) : (
               <video
                 src={item.src}
-                alt={item.alt}
-                className="w-full h-auto object-cover"
                 autoPlay
-                muted
                 loop
+                muted
+                className="w-full h-full object-cover rounded-lg"
               />
             )}
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
-};
-
-export default Gallery;
+}

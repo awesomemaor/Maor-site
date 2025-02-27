@@ -76,24 +76,25 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <li
-            className="w-[350px] max-w-full relative rounded-xl border border-slate-700 px-6 py-6 md:w-[450px] shadow-lg transition-all duration-300 hover:scale-105"
-            style={{
-              background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)",
-              borderImage: "linear-gradient(90deg, #8A2BE2, #00BFFF) 1",
-              boxShadow: "0 0 15px rgba(138, 43, 226, 0.5)",
-            }}
+            className="w-[280px] max-w-full relative rounded-3xl border border-transparent px-6 py-4 shadow-lg transition-all duration-300 hover:scale-105"
             key={item.name}
+            style={{
+              background: "rgba(10, 10, 10, 0.5)", // רקע כהה יותר לשדר את האפקט של זכוכית
+              backdropFilter: "blur(25px)", // אפקט זכוכית חזק יותר
+              boxShadow: "0 8px 25px rgba(0, 0, 0, 0.5)", // צללים חדים יותר
+              borderRadius: "20px", // פינות סגלגלות
+            }}
           >
-            <blockquote className="flex flex-col items-start">
-              <span className="relative z-20 text-lg leading-[1.6] text-white font-semibold">
+            <blockquote className="flex flex-col items-start text-right">
+              <span className="relative z-20 text-lg leading-[1.4] text-white font-semibold">
                 {item.quote}
               </span>
               <div className="relative z-20 mt-4 flex flex-row items-center">
                 <span className="flex flex-col gap-1">
-                  <span className="text-sm leading-[1.6] text-gray-300 font-medium">
+                  <span className="text-sm leading-[1.4] text-gray-200 font-medium">
                     {item.name}
                   </span>
-                  <span className="text-xs leading-[1.6] text-gray-400 font-normal">
+                  <span className="text-xs leading-[1.4] text-gray-300 font-normal">
                     {item.title}
                   </span>
                 </span>
